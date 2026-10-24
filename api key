@@ -1,0 +1,21 @@
+// Match.kt
+data class LiveMatchResponse(
+    val matchId: String,
+    val homeTeam: String,
+    val awayTeam: String,
+    val homeScore: Int,
+    val awayScore: Int,
+    val minute: Int,
+    val status: String
+)
+
+// SportsApiService.kt
+import retrofit2.http.GET
+import retrofit2.http.Header
+
+interface SportsApiService {
+    @GET("v3/football/fixtures?live=all")
+    suspend fun getLiveMatches(
+        @Header("x-apisports-key") apiKey: String
+    ): List<LiveMatchResponse>
+}
